@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include <estructuras.h>
+//#include <estructuras.h>
 /*
 struct Logins{
 	
@@ -52,7 +52,7 @@ void *carga(const char *path){
 int main(int argc, char *argv[]) {
 	
 	
-	char *path = "Source/Logins.txt";
+	char *path = "login.txt";
 	carga(path);
 	
 	
