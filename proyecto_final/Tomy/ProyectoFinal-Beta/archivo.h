@@ -1,7 +1,6 @@
-#ifndef ARCHIVO.H
-#define ARCHIVO.H
+#ifndef ARCHIVO_H
+#define ARCHIVO_H
 
-FILE* archApertura(const char* path);
-void *archLectura(const char *path);
-int archivo(void);
+void LeerFile(const char* path){
+void InsertarNuevoconst (char* path, const char * user, const char *pass);
 #endif

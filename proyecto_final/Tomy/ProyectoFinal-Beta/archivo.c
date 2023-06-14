@@ -1,6 +1,7 @@
 #include <stdio.h>
+#include "archivo.h"
 
-
+//ESTE ESSSSSSS
 
 void LeerFile(const char* path){
 	
@@ -35,17 +36,5 @@ void InsertarNuevo(const char* path, const char * user, const char *pass){
 	fclose(arch);
 
 }
-	
-int main(int argc, char *argv[]) {
-	
-	
-	char *path = "../login.txt";
-	
-	//LeerFile(path);
-	
-	InsertarNuevo(path,"tomas", "1234");
-	
-	LeerFile(path);
-	return 0;
-}
+
 	
