@@ -1,8 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "../Include/estructuras.h"	
-#include "../Include/menu.h"	
+#include "include estructuras.h"	
+#include "include menu.h"	
 
 
 int main(){

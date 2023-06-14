@@ -1,25 +1,17 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#include "include estructuras.h"	
-#include "include menu.h"
+#include <stddef.h>
+#include "estructuras.h"	
+#include "menu.h"	
 
-int mostrarMenu(void){
-	int opx;
-	printf("1. Insertar nodo\n");
-	printf("2. Buscar nodo\n");
-	printf("3. Imprimir arbol\n");
-	printf("4. Salir\n");
-	printf("Ingrese su opcion: ");
-	scanf("%d",&opx);
-	
-	return opx;
-}
 
-int menu(){
+
+int main(int argc, char *argv[]){
 	struct nodo* raiz = NULL;
-	char user;
-	char pass;
+	char user[26];
+	char pass[26];
+	int opcion;
 	
 	do {
 		
@@ -35,13 +27,13 @@ int menu(){
 			break;
 			
 		case 2:
-		
+			
 			printf("Ingrese el usuario: ");
 			scanf("%s", user);
 			struct nodo* nodoencontrado = buscarnodo(raiz, user);
 			if (nodoencontrado != NULL) {
-				printf("Nodo encontrado: %d\n", nodoencontrado->user);
-				printf("Nodo encontrado: %d\n", nodoencontrado->pass);
+				printf("Nodo encontrado: %s\n", nodoencontrado->user);
+				printf("Nodo encontrado: %s\n", nodoencontrado->pass);
 			} else {
 				printf("Nodo no encontrado.\n");
 			}
@@ -52,6 +44,8 @@ int menu(){
 			printf("\n");
 			break;
 		case 4:
+			raiz=eliminarnodo(raiz,user,pass);
+			case 5:
 			printf("Saliendo del programa...\n");
 			break;
 		default:
@@ -60,8 +54,7 @@ int menu(){
 		}
 		
 		printf("\n");
-	} while (opcion != 4);
-	
+	} while (opcion != 5);
 	
 	return 0;
 }

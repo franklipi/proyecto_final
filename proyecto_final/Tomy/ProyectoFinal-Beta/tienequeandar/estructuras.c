@@ -1,7 +1,8 @@
-#include "include estructuras.h"
+#include "estructuras.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <string.h>
 
 
 struct nodo* crearnodo(const char* user, const char* pass) {
@@ -71,9 +72,9 @@ struct nodo* insertarnodo(struct nodo* raiz, const char* user, const char* pass)
 			}
 			
 			struct nodo* nodomin = buscarmin(raiz->derecho);
-			raiz->dato = nodomin->user;
-			raiz->derecho = eliminarnodo(raiz->derecho, nodomin->user);
-		}
+			strcpy(nodomin->user,user);
+			strcpy(nodomin->pass,pass);
+			raiz->derecho = eliminarnodo(raiz->derecho, nodomin->user,nodomin->pass);
 		
 		return raiz;
 	}
@@ -84,7 +85,6 @@ struct nodo* insertarnodo(struct nodo* raiz, const char* user, const char* pass)
 				imprimirarbol(raiz->izquierdo);
 				printf("%s", raiz->user);
 				printf("%s", raiz->pass);
-				
 				imprimirarbol(raiz->derecho);
 			}
 		}
