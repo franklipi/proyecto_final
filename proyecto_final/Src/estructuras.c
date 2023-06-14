@@ -3,22 +3,26 @@
 #include <stdlib.h>
 #include <stddef.h>
 
-struct nodo* crearnodo(int valor) {
+
+struct nodo* crearnodo(char user, char pass) {
 	struct nodo* nodo = (struct nodo*)malloc(sizeof(struct nodo));
-	nodo->dato = valor;
+	nodo->user = user;
+	nodo->pass = pass;
 	nodo->izquierdo = NULL;
 	nodo->derecho = NULL;
 	return nodo;
 }
-struct nodo* insertarnodo(struct nodo* raiz, int valor) {
+
+struct nodo* insertarnodo(struct nodo* raiz, char user, char pass) {
 	if (raiz== NULL) {
-		struct nodo* nuevo_nodo = crearnodo(valor);
+		struct nodo* nuevo_nodo = crearnodo(user, pass);
 		return nuevo_nodo;
 	} else {
-		if (valor < raiz->dato) {
-			raiz->izquierdo = insertarnodo(raiz->izquierdo, valor);
-		} else {
-			raiz->derecho = insertarnodo(raiz->derecho, valor);
+		if (strcmp(user, raiz->user) < 0) {
+			raiz->izquierdo = insertarnodo(raiz->izquierdo, user, pass);
+		} else if (strcmp(user, raiz->user) < 0) {
+			raiz->derecho = insertarnodo(raiz->derecho, user, pass);
+			
 		}
 		//return raiz;
 	}
@@ -26,15 +30,15 @@ struct nodo* insertarnodo(struct nodo* raiz, int valor) {
 }
 
 	
-	struct nodo* buscarnodo(struct nodo* raiz, int valor) {
-	if (raiz == NULL || raiz->dato == valor) {
+	struct nodo* buscarnodo(struct nodo* raiz, char user) {
+	if (raiz == NULL || raiz->user == user) {
 		return raiz;
 	}
 	
-	if (valor < raiz->dato) {
-		return buscarnodo(raiz->izquierdo, valor);
+	if (user < raiz->user) {
+		return buscarnodo(raiz->izquierdo, user);
 	} else {
-		return buscarnodo(raiz->derecho, valor);
+		return buscarnodo(raiz->derecho, user);
 	}
 }
 	
@@ -45,15 +49,16 @@ struct nodo* insertarnodo(struct nodo* raiz, int valor) {
 		}
 		return nodo;
 	}
-	struct nodo* eliminarnodo(struct nodo* raiz, int valor) {
+	
+	struct nodo* eliminarnodo(struct nodo* raiz, char user, char pass) {
 		if (raiz == NULL) {
 			return raiz;
 		}
 		
-		if (valor < raiz->dato) {
-			raiz->izquierdo = eliminarnodo(raiz->izquierdo, valor);
-		} else if (valor > raiz->dato) {
-			raiz->derecho = eliminarnodo(raiz->derecho, valor);
+		if (user < raiz->user) {
+			raiz->izquierdo = eliminarnodo(raiz->izquierdo, user,pass);
+		} else if (user > raiz->user) {
+			raiz->derecho = eliminarnodo(raiz->derecho, user,pass);
 		} else {
 			if (raiz->izquierdo == NULL) {
 				struct nodo* temp = raiz->derecho;
@@ -66,8 +71,8 @@ struct nodo* insertarnodo(struct nodo* raiz, int valor) {
 			}
 			
 			struct nodo* nodomin = buscarmin(raiz->derecho);
-			raiz->dato = nodomin->dato;
-			raiz->derecho = eliminarnodo(raiz->derecho, nodomin->dato);
+			raiz->dato = nodomin->user;
+			raiz->derecho = eliminarnodo(raiz->derecho, nodomin->user);
 		}
 		
 		return raiz;
@@ -77,7 +82,9 @@ struct nodo* insertarnodo(struct nodo* raiz, int valor) {
 		void imprimirarbol(struct nodo* raiz) {
 			if (raiz != NULL) {
 				imprimirarbol(raiz->izquierdo);
-				printf("%d ", raiz->dato);
+				printf("%s", raiz->user);
+				printf("%s", raiz->pass);
+				
 				imprimirarbol(raiz->derecho);
 			}
 		}
