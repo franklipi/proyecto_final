@@ -6,28 +6,22 @@
 #include "menu.h"
 #include "archivo.h"
 
-
-
-
-//ESTE ESSSSSSS
-
-
-
-int main(int argc, char *argv[]) {
+int main(int argc, char *argv[]){
 	
 	struct nodo* raiz = NULL;
 	char user[26];
 	char pass[26];
+	const char *path ="../login.txt";
 	int op;
-	char path = "../login.txt";
+	
 	do {
 		op = mostrarMenu();
 		switch (op) {
 		case 1:
 			printf("Ingrese el usuario: ");
-			scanf("%s", user);
+			scanf("%25s", user);
 			printf("Ingrese la contraseña: ");
-			scanf("%s", pass);
+			scanf("%25s", pass);
 			raiz = insertarnodo(raiz, user, pass);
 			printf("Nodo insertado exitosamente.\n");
 			break;
@@ -60,20 +54,16 @@ int main(int argc, char *argv[]) {
 			scanf("%s", user);
 			printf("Ingrese la contraseña: ");
 			scanf("%s", pass);
-			InsertarNuevo(&path, &user, &pass);
-			LeerFile(&path);
+			InsertarNuevo(path, user, pass);
+			LeerFile(path);
 			break;
 			
 		case 6:
 			printf("Saliendo del programa...\n");
 			break;
-			
-		default:
-			printf("Opción inválida. Por favor, ingrese una opción válida.\n");
-			break;
 		}
-		
 		printf("\n");
+		
 	} while (op != 6);
 	
 	return 0;

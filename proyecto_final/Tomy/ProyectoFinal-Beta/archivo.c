@@ -1,5 +1,8 @@
+#include "estructuras.h"
 #include <stdio.h>
-#include "archivo.h"
+#include <stdlib.h>
+#include <stddef.h>
+#include <string.h>
 
 //ESTE ESSSSSSS
 
@@ -7,7 +10,7 @@ void LeerFile(const char* path){
 	
 	FILE* arch = fopen(path, "r");
 	
-	char *text;
+	char text[100]={" "};
 	
 	
 	// Leer y mostrar el contenido del archivo
@@ -22,11 +25,9 @@ void LeerFile(const char* path){
 	
 	// Cerrar el archivo
 	fclose(arch);
-	
-
 }
 
-void InsertarNuevo(const char* path, const char * user, const char *pass){
+void InsertarNuevo(const char* path, const char user[], const char pass[]){
 	
 	FILE* arch = fopen(path, "a");
 	
