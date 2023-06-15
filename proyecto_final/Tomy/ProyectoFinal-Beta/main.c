@@ -15,15 +15,36 @@ int main(int argc, char *argv[]){
 	int op;
 	
 	do {
+		//Precarga(raiz,path);
 		op = mostrarMenu();
 		switch (op) {
 		case 1:
+			
+			printf("Bienvenido: ");
 			printf("Ingrese el usuario: ");
-			scanf("%25s", user);
+			do{
+				scanf("%25s", user);
+				
+				if(!(validarUsuario(user))){
+					puts("Usuario Invalido");
+				}
+				
+			}while(!(validarUsuario(user)));
+			
 			printf("Ingrese la contraseña: ");
-			scanf("%25s", pass);
+			do{
+				scanf("%25s", pass);
+				if(!(validarPass(pass))){
+					puts("Pass Invalido");
+				}
+			}while(!(validarPass(pass)));
+			
+			
+			
 			raiz = insertarnodo(raiz, user, pass);
-			printf("Nodo insertado exitosamente.\n");
+			printf("Inicio exitoso.\n");
+			//system("cls");
+			//MenuUsuario(raiz,Usuario,);
 			break;
 			
 		case 2:
@@ -51,11 +72,23 @@ int main(int argc, char *argv[]){
 		case 5:
 			printf("Registro:\n");
 			printf("Ingrese el usuario: ");
-			scanf("%s", user);
+			do{
+				scanf("%25s", user);
+				
+				if(!(validarUsuario(user))){
+					puts("Usuario Invalido");
+				}
+				
+			}while(!(validarUsuario(user)));
 			printf("Ingrese la contraseña: ");
-			scanf("%s", pass);
+			do{
+				scanf("%25s", pass);
+				if(!(validarPass(pass))){
+					puts("Pass Invalido");
+				}
+			}while(!(validarPass(pass)));
 			InsertarNuevo(path, user, pass);
-			LeerFile(path);
+			//LeerFile(path);
 			break;
 			
 		case 6:

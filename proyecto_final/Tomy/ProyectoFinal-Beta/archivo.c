@@ -4,7 +4,7 @@
 #include <stddef.h>
 #include <string.h>
 
-//ESTE ESSSSSSS
+//ESTE ESSSS
 
 void LeerFile(const char* path){
 	
