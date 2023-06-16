@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <windows.h>
-#include <estructuras.h>
+
 
 #define RESET       0
 #define BRIGHT      8
