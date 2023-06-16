@@ -3,8 +3,9 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include "estructuras.h"
-#include "menu.h"
+#include "menu_principal.h"
 #include "archivo.h"
+#include "menu_principal.h"
 
 int main(int argc, char *argv[]){
 	
@@ -12,14 +13,14 @@ int main(int argc, char *argv[]){
 	char user[26];
 	char pass[26];
 	const char *path ="../login.txt";
-	int op;
+	char op;
 	
 	
 	do{
 		op = mostrarMenu();
 		//Precarga(raiz,path);
 		switch (op){
-		case 1:
+		case '1':
 			printf("Bienvenido: ");
 			printf("Ingrese el usuario: ");
 			do{
@@ -39,15 +40,15 @@ int main(int argc, char *argv[]){
 				}
 			}while(!(validarPass(pass)));
 			
-			
-			
 			//Busqueda(user, pass);
 			printf("Inicio exitoso.\n");
+			
+			
 			//system("cls");
-			MenuUsuario(raiz,Usuario);
+			//MenuUsuario(raiz,Usuario);
 			break;
 			
-		case 2:
+		case '2':
 			printf("Crear usuario:\n");
 			printf("Ingrese el usuario: ");
 			do{
@@ -71,14 +72,14 @@ int main(int argc, char *argv[]){
 			//LeerFile(path);
 			break;
 			
-		case 3:
+		case '3':
 			printf("Saliendo del programa...\n");
 			break;
 		}
 		printf("\n");
 		
 		
-	} while (op != 6);
+	} while (op != '3');
 	
 	return 0;
 }

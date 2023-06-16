@@ -1,16 +1,17 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "menu.h"
-void mostrarMenu(struct nodo* raiz,const char* path){
+#include "Menu_Usuario.h"
+
+void menuUsuario(struct nodo* raiz,const char* path){
 	char opx;
 	const char nombre_us[26];
 	char amigos[200];
-	struct nodo* buscar;
+	struct nodo* buscar=NULL;
 	int encontrado=0;
 	int opc_elim;
 	int contador_amigos=0;
 //abro mi archivo al principio , para leer
-	archivo = fopen("path.txt", "r"); // Reemplaza "archivo.txt" con la ruta de tu archivo
+	FILE *archivo = fopen("path.txt", "r"); // Reemplaza "archivo.txt" con la ruta de tu archivo
 	
 	if (archivo == NULL) {
 		printf("Error en el archivo.\n");
@@ -26,7 +27,7 @@ void mostrarMenu(struct nodo* raiz,const char* path){
 	//abrir el archivo correspondiente//FILE *archivo;
 	printf("SI DESEA BUSCAR ALGUIEN EN LA RED PRESIONE 1\n SI DESEA SALIR PRESIONE S");
 	scanf("%c",opx);
-	switch (opc){
+	switch (opx){
 		
 	case 1:
 		printf("\t BUSCAR USUARIOS \n Ingrese el usuario a buscar en la red....\n");
@@ -41,13 +42,13 @@ void mostrarMenu(struct nodo* raiz,const char* path){
 				if (strstr(amigos, nombre_us) != NULL) {
 					printf("Usted tiene '%s' agregado como amigo.\n", nombre_us);
 					encontrado = 1;
-					printf("\n Desea eliminarlo de su lista?\n 1.Si\n2.No\n"&opc_elim)
+					printf("\n Desea eliminarlo de su lista?\n 1.Si\n2.No\n",&opc_elim);
 						if(opc_elim==1){
 						archivo = fopen("archivo.txt", "r+"); // Reemplaza "archivo.txt" con el nombre y ruta del archivo original
 						
 						if (archivo == NULL) {
 							printf("No se pudo abrir el archivo.\n");
-							return 1;
+							return ;
 						}
 						
 						FILE *archivoTemporal = fopen(nombreTemporal, "w"); // Abre el archivo temporal en modo escritura
@@ -55,7 +56,7 @@ void mostrarMenu(struct nodo* raiz,const char* path){
 						if (archivoTemporal == NULL) {
 							printf("No se pudo abrir el archivo temporal.\n");
 							fclose(archivo);
-							return 1;
+							return ;
 						}
 						
 						while (fscanf(archivo, "%s", nombre_us) != EOF) {
@@ -82,7 +83,8 @@ void mostrarMenu(struct nodo* raiz,const char* path){
 			
 			if (!encontrado) {
 				printf("Usted no tiene agregado '%s' como amigo.\n %a", nombre_us);
-				printf("\t Desea AGREGARLO a su lista?\n 1. Si.\n 2. no")
+				printf("\t Desea AGREGARLO a su lista?\n 1. Si.\n 2. no");
+				scanf("%c", );
 					switch(opc){
 					case 1:
 						//abro el archivo al final//
@@ -98,6 +100,8 @@ void mostrarMenu(struct nodo* raiz,const char* path){
 						
 						break;
 					case 2:
+						
+						
 						break;
 						
 						
