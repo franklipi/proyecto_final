@@ -4,7 +4,6 @@
 #include <stddef.h>
 #include <string.h>
 
-//ESTE ESSSS
 
 void LeerFile(const char* path){
 	
@@ -17,9 +16,6 @@ void LeerFile(const char* path){
 	if(arch != NULL){
 		while (fgets(text, sizeof(text), arch) != NULL) {
 			printf("%s", text);
-			
-		
-			
 		}
 	}else{
 		puts("[Apetura_Archivo] Error : No Encontrado");

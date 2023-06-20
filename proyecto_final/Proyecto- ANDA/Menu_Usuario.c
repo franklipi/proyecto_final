@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Menu_Usuario.h"
+//#include "Menu_Usuario.h"
 
 void menuUsuario(struct nodo* raiz,const char* path){
 	char opx;
@@ -10,6 +10,7 @@ void menuUsuario(struct nodo* raiz,const char* path){
 	int encontrado=0;
 	int opc_elim;
 	int contador_amigos=0;
+	char text;
 //abro mi archivo al principio , para leer
 	FILE *archivo = fopen("path.txt", "r"); // Reemplaza "archivo.txt" con la ruta de tu archivo
 	
