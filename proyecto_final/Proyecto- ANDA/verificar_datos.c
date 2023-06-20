@@ -43,7 +43,7 @@ char *validarUser() {
 			puts("Usuario invalido... Reingrese...");\
 		}else{
 			band=true;
-			printf("Datos ingresados correctamente\n ");
+			//printf("Datos ingresados correctamente\n ");
 		}
 		
 	}while(!band); // Usuario valido si cumple las condiciones de caracteres permitidos
@@ -55,11 +55,11 @@ char *validarUser() {
 char *validarPass() {
 	
 	bool band;
-	
+	int i;
 	static char passw[26];
 	
 	do {
-		band=true;
+	
 		printf("Ingrese la contraseña: ");
 		scanf("%26s",passw);
 		
@@ -67,9 +67,8 @@ char *validarPass() {
 		if (len < 6 || len > 26) {
 			band = false; // Longitud incorrecta
 		}else{
-			
 			// Verificar si la contraseña contiene al menos un dígito y un carácter especial
-			for (size_t i = 0; i < len; i++) {
+			for ( i = 0; i < len; i++) {
 				if (isdigit(passw[i])) {
 					band = true;
 				} else if (!isalnum(passw[i])) {

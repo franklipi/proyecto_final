@@ -11,8 +11,8 @@ char *validarUser() {
 
 	bool band;
 	do{
-		printf("Ingrese el usuario: "); scanf("%26s",users);
 		band = true;
+		printf("Ingrese el usuario: "); scanf("%26s",users);
 		// Eliminar el carácter de nueva línea ('\n') al final del string
 		size_t longitud = strlen(users);
 		if (longitud > 0 && users[longitud - 1] == '\n') {
@@ -38,10 +38,13 @@ char *validarUser() {
 		
 		if ((!band)) {
 			puts("Usuario invalido... Reingrese...");\
+		}else{
+			puts("Usuario correcto...");
+			band = true;
 		}
 		
 		
-	}while(band); // Usuario valido si cumple las condiciones de caracteres permitidos
+	}while(!band); // Usuario valido si cumple las condiciones de caracteres permitidos
 	
 	return users;
 }
@@ -74,6 +77,8 @@ char *validarPass() {
 		
 		if ((!band)) {
 			puts("Password invalido... Reingrese...");\
+		}else{
+			puts("password correcto...");
 			band = true;
 		}
 		
@@ -82,95 +87,6 @@ char *validarPass() {
 	return passw;
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-/*
-
-do {
-printf("Ingrese el usuario: "); scanf("%26s",users);
-bool band = true;
-
-// Eliminar el carácter de nueva línea ('\n') al final del string
-size_t longitud = strlen(users);
-if (longitud > 0 && users[longitud - 1] == '\n') {
-users[longitud - 1] = '\0';
-}
-
-// Verificar la longitud del nombre de usuario
-longitud = strlen(users);
-if (longitud < 4 || longitud > 26) {
-band = false;
-}
-
-// Verificar caracteres permitidos
-for (int i = 0; i < longitud; i++) {
-char caracter = users[i];
-if (!(caracter >= 'a' && caracter <= 'z') &&
-!(caracter >= 'A' && caracter <= 'Z') &&
-!(caracter >= '0' && caracter <= '9') &&
-!(caracter == '_' || caracter == '-' || caracter == '.')) {
-band = false;
-}
-}
-
-if ((!band)) {
-puts("Usuario invalido... Reingrese...");\
-}
-
-
-}while(!band); // Usuario valido si cumple las condiciones de caracteres permitidos
-
-
-
-bool band = true;
-while(band){
-
-printf("Ingrese el usuario: "); scanf("%26s",users);
-
-bool band = false;
-
-// Eliminar el carácter de nueva línea ('\n') al final del string
-size_t longitud = strlen(users);
-if (longitud > 0 && users[longitud - 1] == '\n') {
-users[longitud - 1] = '\0';
-}
-
-// Verificar la longitud del nombre de usuario
-longitud = strlen(users);
-if (longitud < 4 || longitud > 26) {
-band = true ;
-}
-
-// Verificar caracteres permitidos
-for (int i = 0; i < longitud; i++) {
-char caracter = users[i];
-if (!(caracter >= 'a' && caracter <= 'z') &&
-!(caracter >= 'A' && caracter <= 'Z') &&
-!(caracter >= '0' && caracter <= '9') &&
-!(caracter == '_' || caracter == '-' || caracter == '.')) {
-band = true;
-}
-}
-
-if ((!band)) {
-puts("Usuario invalido... Reingrese...");\
-}
-
-
-
-}
-*/
 
 
 

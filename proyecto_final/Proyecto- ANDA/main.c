@@ -2,48 +2,47 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include "estructuras.h"
+#include "gestion_arbol.h"
 #include "menu_principal.h"
-#include "archivo.h"
-#include "precarga.h"
-
+#include "gestion_archivo.h"
+#include "carga_datos.h"
+    
 int main(int argc, char *argv[]){
 	
 	struct nodo* raiz = NULL;
 	char * user;
 	char * pass;
 	const char *path = "../login.txt";
-	int op;
+	char op;
 	
 	do{
+		fflush(stdin);
 		op = mostrarMenu();
 		
-		
-		//raiz = precarga(raiz,path);
 		switch (op){
-		case '1':
-			user = validarUser();
 			
+		case '1':
+			raiz = precarga(raiz,path);
+			
+			user = validarUser();
 			pass = validarPass();
 			
-			//buscarnodo(struct nodo* raiz, const char user[]);
-			printf("Inicio exitoso.\n");
-	
-			//MenuUsuario(raiz,Usuario);
+			struct nodo* nodoEncontrado = buscarnodo(raiz, user);
+			if (nodoEncontrado != NULL && strcmp(nodoEncontrado->pass, pass) == 0) {
+				printf("Inicio exitoso.\n");
+				
+				// MenuUsuario(raiz, Usuario);
+			} else {
+				printf("Inicio fallido. Usuario o contraseña incorrectos.\n");
+			}
 			break;
 			
 		case '2':
 			printf("Crear usuario:\n");
-			printf("Ingrese el usuario: ");
 			user = validarUser();
-			
-			printf("Ingrese la contraseña: ");
 			pass = validarPass();
-			
-			
-			//if()Busqueda(user, pass);
+	
 			InsertarNuevo(path, user, pass);
-			//LeerFile(path);
 			break;
 			
 		case '3':
@@ -57,3 +56,25 @@ int main(int argc, char *argv[]){
 	return 0;
 }
 
+	
+	
+	/*
+	
+	
+	{
+		raiz = precarga(raiz, path);
+		
+		user = validarUser();
+		pass = validarPass();
+		
+		// Buscar si el usuario y la contraseña son válidos en el árbol raíz
+		struct nodo* nodoEncontrado = buscarnodo(raiz, user);
+		if (nodoEncontrado != NULL && strcmp(nodoEncontrado->pass, pass) == 0) {
+			printf("Inicio exitoso.\n");
+			registrado = 1; // El usuario se ha registrado exitosamente
+			// MenuUsuario(raiz, Usuario);
+		} else {
+			printf("Inicio fallido. Usuario o contraseña incorrectos.\n");
+		}
+	}
+*/
