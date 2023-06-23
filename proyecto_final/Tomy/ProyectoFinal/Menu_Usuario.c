@@ -4,30 +4,8 @@
 
 void menuUsuario(struct nodo* raiz,const char* path){
 	char opx;
-	char nombre_us[26];
+	const char nombre_us[26];
 	char amigos[200];
-<<<<<<< HEAD:proyecto_final/Tomy/ProyectoFinal-Beta/menu.c
-	struct nodo* buscar;
-	char name_user[26]=raiz->user;
-	int encontrado=0;
-	int opc_elim;
-	int contador_amigos=0;
-
-	FILE* archivo;
-	char *user=raiz->user;
-	char *extension=".txt";
-	// Crear el nombre del archivo concatenando el usuario y la extensión
-	char filename[100];
-	//const char directory[100]="C:\\Users\\fran_\\OneDrive\\Escritorio\\prueba\\";
-	//sprintf(filename, "%s%s%s", directory, user, txt);
-	
-	snprintf(filename, sizeof(filename), "C:\\Users\\fran_\\OneDrive\\Escritorio\\prueba\\%s%s", user, extension);
-	puts(filename);
-	
-	const char* mode="a+";
-	archivo = fopen(filename,mode);
-	
-=======
 	struct nodo* buscar=NULL;
 	int encontrado=0;
 	int opc_elim;
@@ -35,49 +13,37 @@ void menuUsuario(struct nodo* raiz,const char* path){
 	char text;
 //abro mi archivo al principio , para leer
 	FILE *archivo = fopen("path.txt", "r"); // Reemplaza "archivo.txt" con la ruta de tu archivo
->>>>>>> 3404ee933f9be29475bab7f5544c84d55194c3a1:proyecto_final/Tomy/ProyectoFinal/Menu_Usuario.c
 	
 	if (archivo == NULL) {
 		printf("Error en el archivo.\n");
 		return 1;
 	}
 	
+	//FILE *archivo;//
+	
 	do{
 		printf("\n BIENVENIDO %s!\n",raiz->user);
 	
 	printf("CANTIDAD DE AMIGOS:\n %d",cantidad); 
 	//abrir el archivo correspondiente//FILE *archivo;
-<<<<<<< HEAD:proyecto_final/Tomy/ProyectoFinal-Beta/menu.c
-	printf("SI DESEA BUSCAR ALGUIEN EN LA RED PRESIONE 1\n SI DESEA SALIR PRESIONE S\n");
-	scanf("%c",&opx);
-	switch (opx){
-		case 1:
-=======
 	printf("SI DESEA BUSCAR ALGUIEN EN LA RED PRESIONE 1\n SI DESEA SALIR PRESIONE S");
 	scanf("%c",opx);
 	switch (opx){
 		
 	case 1:
->>>>>>> 3404ee933f9be29475bab7f5544c84d55194c3a1:proyecto_final/Tomy/ProyectoFinal/Menu_Usuario.c
 		printf("\t BUSCAR USUARIOS \n Ingrese el usuario a buscar en la red....\n");
 		scanf("%s",nombre_us);
 		struct nodo* buscar=buscarnodo(raiz,nombre_us);
 		if(buscar!=NULL){
 			printf("\n Usuario encontrado.\n %s\n",buscar->nombre_us);
-		}
 		
+	
 			//bucle obtiene lo que hay en el archivo en una cadena y verifica la existencia//
 			while (fgets(amigos, sizeof(amigos), archivo) != NULL) {
-				//La función devuelve un puntero a la primera aparición de la subcadena dentro de la cadena principal, o un puntero nulo (NULL) si la subcadena no se encuentra en la cadena principal.
 				if (strstr(amigos, nombre_us) != NULL) {
 					printf("Usted tiene '%s' agregado como amigo.\n", nombre_us);
 					encontrado = 1;
-<<<<<<< HEAD:proyecto_final/Tomy/ProyectoFinal-Beta/menu.c
-					printf("\n Desea eliminarlo de su lista?\n 1.Si\n2.No\n");
-					scanf("%d",&opc_elim);
-=======
 					printf("\n Desea eliminarlo de su lista?\n 1.Si\n2.No\n",&opc_elim);
->>>>>>> 3404ee933f9be29475bab7f5544c84d55194c3a1:proyecto_final/Tomy/ProyectoFinal/Menu_Usuario.c
 						if(opc_elim==1){
 						archivo = fopen("archivo.txt", "r+"); // Reemplaza "archivo.txt" con el nombre y ruta del archivo original
 						
@@ -151,7 +117,10 @@ void menuUsuario(struct nodo* raiz,const char* path){
 		fclose(archivo);
 		break;
 		//switch//
-} while(opx!='s'&&opx!='S');
+} while(opx!='s'||opx!='S');
+	printf("\n Saliendo\n");
 	
+
+}
 
 

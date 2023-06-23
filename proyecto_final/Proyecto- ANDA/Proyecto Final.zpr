@@ -26,7 +26,7 @@ cursor=33:34
 open=true
 [source]
 path=menu_principal.c
-cursor=14:3
+cursor=4:0
 open=true
 [source]
 path=gestion_archivo.c

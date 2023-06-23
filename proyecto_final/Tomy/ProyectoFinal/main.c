@@ -1,49 +1,55 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stddef.h>
-#include "estructuras.h"
+#include "login.h"
+#include "gestion_arbol.h"
 #include "menu_principal.h"
-#include "archivo.h"
-#include "precarga.h"
+#include "gestion_archivo.h"
+#include "carga_datos.h"
+#include <windows.h>
+
 
 int main(int argc, char *argv[]){
+	
+	//        Definicion de Varibles      //
+	//------------------------------------//
+	
 	
 	struct nodo* raiz = NULL;
 	char * user;
 	char * pass;
-	const char *path = "../login.txt";
-	int op;
+	const char *path = "login.txt";
+	char op;
+	
+	
+	
+	//        Funcion Principal			//						
+	//----------------------------------//
 	
 	do{
+		fflush(stdin);
 		op = mostrarMenu();
 		
-		
-		//raiz = precarga(raiz,path);
 		switch (op){
+			
 		case '1':
-			user = validarUser();
+			system("cls");
+			raiz = precarga(raiz,path);
 			
-			pass = validarPass();
+			if(login(raiz,user,pass)){
+				puts("inicio exitoso");
+			}
 			
-			//buscarnodo(struct nodo* raiz, const char user[]);
-			printf("Inicio exitoso.\n");
-	
-			//MenuUsuario(raiz,Usuario);
 			break;
 			
 		case '2':
 			printf("Crear usuario:\n");
-			printf("Ingrese el usuario: ");
 			user = validarUser();
-			
-			printf("Ingrese la contraseña: ");
 			pass = validarPass();
 			
-			
-			//if()Busqueda(user, pass);
 			InsertarNuevo(path, user, pass);
-			//LeerFile(path);
 			break;
 			
 		case '3':
@@ -56,4 +62,5 @@ int main(int argc, char *argv[]){
 	
 	return 0;
 }
+
 

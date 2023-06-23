@@ -5,14 +5,17 @@
 #include <stdbool.h>
 #include <string.h>
 
-char *validarUser() {
+char * validarUser(){
 	
-	static char users[26];
+	char* users = (char*)malloc(27 * sizeof(char)); // Asignar memoria para el nombre de usuario
 
 	bool band;
 	do{
-		band = true;
-		printf("Ingrese el usuario: "); scanf("%26s",users);
+		band=true;
+		//printf("Ingrese el usuario: "); 
+		scanf("%26s",users);
+		
+		while (getchar() != '\n');
 		// Eliminar el carácter de nueva línea ('\n') al final del string
 		size_t longitud = strlen(users);
 		if (longitud > 0 && users[longitud - 1] == '\n') {
@@ -35,14 +38,13 @@ char *validarUser() {
 				band = false;
 			}
 		}
-		
+				
 		if ((!band)) {
 			puts("Usuario invalido... Reingrese...");\
 		}else{
-			puts("Usuario correcto...");
-			band = true;
+			band=true;
+			//printf("Datos ingresados correctamente\n ");
 		}
-		
 		
 	}while(!band); // Usuario valido si cumple las condiciones de caracteres permitidos
 	
@@ -53,20 +55,21 @@ char *validarUser() {
 char *validarPass() {
 	
 	bool band;
-	
-	static char passw[26];
+	int i;
+	char* passw = (char*)malloc(27 * sizeof(char)); // Asignar memoria para la contraseña
 	
 	do {
-		printf("Ingrese la contraseña: ");scanf("%26s",passw);
-		bool band = true;
+	
+		//printf("Ingrese la contraseña: ");
+		scanf("%26s",passw);
+		while (getchar() != '\n');
 		
 		size_t len = strlen(passw);
 		if (len < 6 || len > 26) {
 			band = false; // Longitud incorrecta
 		}else{
-			
 			// Verificar si la contraseña contiene al menos un dígito y un carácter especial
-			for (size_t i = 0; i < len; i++) {
+			for ( i = 0; i < len; i++) {
 				if (isdigit(passw[i])) {
 					band = true;
 				} else if (!isalnum(passw[i])) {
@@ -77,21 +80,16 @@ char *validarPass() {
 		
 		if ((!band)) {
 			puts("Password invalido... Reingrese...");\
+			
 		}else{
-			puts("password correcto...");
-			band = true;
-		}
+		band=true;
+		//printf("Datos ingresados correctamente\n ");
+	}
 		
 	}while(!band); // Contraseña válida si cumple ambas condiciones
 	
 	return passw;
 }
-
-
-
-
-	
-
 
 
 
