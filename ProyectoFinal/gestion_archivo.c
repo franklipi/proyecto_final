@@ -40,13 +40,16 @@ void InsertarNuevo(const char *path, const char user[], const char pass[]){
 
 void ordenarUsers(const char* path) {
 	FILE* arch = fopen(path, "r+");
+	unsigned int i = 0;
+	unsigned short int numUsers = 0;
+	
 	if (arch == NULL) {
 		printf("Eror en base de datos...No se encuentra.\n");
 		return;
 	}
 		
 	// Contar la cantidad de usuarios en el archivo
-	int numUsers = 0;
+
 	
 	char line[Max_lines];
 	
@@ -62,15 +65,16 @@ void ordenarUsers(const char* path) {
 		fclose(arch);
 		return;
 	}
-		
-	int i = 0;
+
+	
+	
 	while (fgets(line, Max_lines, arch) != NULL) {
 		size_t longg = strlen(line);
 		lines[i] = (char*)malloc((longg + 1) * sizeof(char));
 		strcpy(lines[i], line);
 		i++;
 	}
-		
+
 	// Ordenar las líneas utilizando el algoritmo de ordenamiento de burbuja
 	for (int i = 0; i < numUsers - 1; i++) {
 		for (int j = 0; j < numUsers - i - 1; j++) {

@@ -3,13 +3,14 @@
 #include <string.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <windows.h>
 #include "gestion_arbol.h"
-#include "gestion_archivo.h"
-#include "carga_datos.h"
 #include "menu_principal.h"
 #include "login.h"
-#include "verificar_datos.h"
-#include <windows.h>
+#include "Sign_in.h" 
+#include "gestion_archivo.h"
+#include "carga_datos.h"
+
 
 int main(int argc, char *argv[]){
 	
@@ -18,11 +19,8 @@ int main(int argc, char *argv[]){
 	
 	
 	struct nodo* raiz = NULL;
-	char* user;
-	char* pass;
 	const char *path = "login.txt";
 	char op;
-	
 	
 	
 	//        Funcion Principal			//						
@@ -30,31 +28,27 @@ int main(int argc, char *argv[]){
 	
 	do{
 		fflush(stdin);
+		raiz = precarga(raiz,path);
 		op = mostrarMenu();
 		
 		switch (op){
 			
 		case '1':
 			system("cls");
-			raiz = precarga(raiz,path);
+			fflush(stdin);
+			login(raiz,path);
 			
-			if(login(raiz,user,pass)){
-				printf("Bienvenido");
-				//Menuusuario(raiz,path,user);
+			break;
+		case '2':
+			
+			system("cls");
+			fflush(stdin);
+			
+			if(!Sign_in(raiz,path)){
+				printf("Creacion Exitosa...\n");
 			}
 			
-			
 			break;
-			
-		case '2':
-			printf("Crear usuario:\n");
-			user = validarUser();
-			//printf("%s",user);
-			pass = validarPass();
-			//printf("%s",pass);
-			InsertarNuevo(path,user,pass);
-			break;
-			
 		case '3':
 			printf("Saliendo del programa...\n");
 			break;
@@ -64,6 +58,7 @@ int main(int argc, char *argv[]){
 	} while (op != '3');
 	
 	return 0;
+	
 }
 
 

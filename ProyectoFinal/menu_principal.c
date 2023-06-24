@@ -6,7 +6,7 @@
 char mostrarMenu(){
 	fflush(stdin);
 	char op;	
-	printf("Bienvenido\n\t1.Iniciar sesion\n\t2.Crear Usuario Nuevo\n\t\n");
+	printf("\t\tBienvenido\n\t1.Iniciar sesion\n\t2.Crear Usuario Nuevo\n\t\n");
 	
 	do{
 		printf("Opcion Ingresada: ");scanf("%c",&op);
