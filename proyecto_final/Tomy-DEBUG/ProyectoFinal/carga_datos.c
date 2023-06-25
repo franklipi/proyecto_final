@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <string.h>
-#include "gestion_archivo.h"
 #include "gestion_arbol.h"
+#include "gestion_archivo.h"
 #include "carga_datos.h"
 
 struct nodo *precarga(struct nodo* raiz, const char *path){

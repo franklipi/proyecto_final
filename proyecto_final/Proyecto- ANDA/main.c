@@ -1,50 +1,54 @@
 #include <stdio.h>
+#include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
 #include <stddef.h>
+#include <windows.h>
 #include "gestion_arbol.h"
 #include "menu_principal.h"
+#include "login.h"
+#include "Sign_in.h" 
 #include "gestion_archivo.h"
 #include "carga_datos.h"
-    
+
+
 int main(int argc, char *argv[]){
 	
+	//        Definicion de Varibles      //
+	//------------------------------------//
+	
+	
 	struct nodo* raiz = NULL;
-	char * user;
-	char * pass;
-	const char *path = "../login.txt";
+	const char *path = "login.txt";
 	char op;
+	
+	
+	//        Funcion Principal			//						
+	//----------------------------------//
 	
 	do{
 		fflush(stdin);
+		raiz = precarga(raiz,path);
 		op = mostrarMenu();
 		
 		switch (op){
 			
 		case '1':
-			raiz = precarga(raiz,path);
+			system("cls");
+			fflush(stdin);
+			login(raiz,path);
 			
-			user = validarUser();
-			pass = validarPass();
-			
-			struct nodo* nodoEncontrado = buscarnodo(raiz, user);
-			if (nodoEncontrado != NULL && strcmp(nodoEncontrado->pass, pass) == 0) {
-				printf("Inicio exitoso.\n");
-				
-				// MenuUsuario(raiz, Usuario);
-			} else {
-				printf("Inicio fallido. Usuario o contraseña incorrectos.\n");
-			}
 			break;
-			
 		case '2':
-			printf("Crear usuario:\n");
-			user = validarUser();
-			pass = validarPass();
-	
-			InsertarNuevo(path, user, pass);
-			break;
 			
+			system("cls");
+			fflush(stdin);
+			
+			if(!Sign_in(raiz,path)){
+				printf("Creacion Exitosa...\n");
+			}
+			
+			break;
 		case '3':
 			printf("Saliendo del programa...\n");
 			break;
@@ -54,27 +58,7 @@ int main(int argc, char *argv[]){
 	} while (op != '3');
 	
 	return 0;
+	
 }
 
-	
-	
-	/*
-	
-	
-	{
-		raiz = precarga(raiz, path);
-		
-		user = validarUser();
-		pass = validarPass();
-		
-		// Buscar si el usuario y la contraseña son válidos en el árbol raíz
-		struct nodo* nodoEncontrado = buscarnodo(raiz, user);
-		if (nodoEncontrado != NULL && strcmp(nodoEncontrado->pass, pass) == 0) {
-			printf("Inicio exitoso.\n");
-			registrado = 1; // El usuario se ha registrado exitosamente
-			// MenuUsuario(raiz, Usuario);
-		} else {
-			printf("Inicio fallido. Usuario o contraseña incorrectos.\n");
-		}
-	}
-*/
+

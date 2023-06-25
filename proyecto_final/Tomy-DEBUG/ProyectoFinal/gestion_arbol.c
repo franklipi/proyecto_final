@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <stddef.h>
 #include <string.h>
+#include "login.h"
 
 struct nodo* crearnodo(const char* user, const char* pass) {
 	struct nodo* nodo = (struct nodo*)malloc(sizeof(struct nodo));
@@ -83,3 +84,4 @@ void imprimirarbol(struct nodo* raiz) {
 		imprimirarbol(raiz->derecho);
 	}
 }
+

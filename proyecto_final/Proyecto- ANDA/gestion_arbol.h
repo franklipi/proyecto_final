@@ -15,4 +15,5 @@ struct nodo* buscarmin(struct nodo* nodo);
 struct nodo* eliminarnodo(struct nodo* raiz, const char user[], const char pass[]);
 void imprimirarbol(struct nodo* raiz);
 
+
 #endif

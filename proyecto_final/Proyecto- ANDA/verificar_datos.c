@@ -5,16 +5,16 @@
 #include <stdbool.h>
 #include <string.h>
 
-char *validarUser() {
-	
-	static char users[26];
+char* validarUser(){
+	char* users = (char*)malloc(27 * sizeof(char)); // Asignar memoria para el nombre de usuario
 
 	bool band;
 	do{
 		band=true;
-		printf("Ingrese el usuario: "); 
+		//printf("Ingrese el usuario: "); 
 		scanf("%26s",users);
 		
+		while (getchar() != '\n');
 		// Eliminar el carácter de nueva línea ('\n') al final del string
 		size_t longitud = strlen(users);
 		if (longitud > 0 && users[longitud - 1] == '\n') {
@@ -37,8 +37,7 @@ char *validarUser() {
 				band = false;
 			}
 		}
-		
-		
+				
 		if ((!band)) {
 			puts("Usuario invalido... Reingrese...");\
 		}else{
@@ -47,21 +46,24 @@ char *validarUser() {
 		}
 		
 	}while(!band); // Usuario valido si cumple las condiciones de caracteres permitidos
+	printf("\nNombre de usuario correcto\n");
 	
 	return users;
 }
 
 
-char *validarPass() {
+char *validarPass(){
 	
+	printf("\n Ingrese una contraseña\n");
+	char* passw = (char*)malloc(27 * sizeof(char)); // Asignar memoria para la contraseña
 	bool band;
 	int i;
-	static char passw[26];
 	
 	do {
 	
-		printf("Ingrese la contraseña: ");
+		//printf("Ingrese la contraseña: ");
 		scanf("%26s",passw);
+		while (getchar() != '\n');
 		
 		size_t len = strlen(passw);
 		if (len < 6 || len > 26) {
@@ -82,12 +84,13 @@ char *validarPass() {
 			
 		}else{
 		band=true;
-		printf("Datos ingresados correctamente\n ");
+		//printf("Datos ingresados correctamente\n ");
 	}
 		
 	}while(!band); // Contraseña válida si cumple ambas condiciones
-	
+	printf("\n Contraseña guardada correctamente\n");
 	return passw;
+	
 }
 
 

@@ -1,19 +1,25 @@
 #include <stdio.h>
 #include <string.h>
 #include "gestion_arbol.h"
+#include "gestion_archivo.h"
 #include "carga_datos.h"
 
-struct nodo *precarga(struct nodo* raiz, const char *path ){
+struct nodo *precarga(struct nodo* raiz, const char *path){
+	
 	
 	FILE* arch = fopen(path, "r");
+	
+	if(arch == NULL){
+		crearArch(path);
+	}else {
+		ordenarUsers(path);
+	}
+	
 	
 	char user[26];
 	char pass[26];
 	char line[54];
 	
-	if(arch != NULL){
-		puts("[Apetura_Archivo] Exito");
-	}
 	
 
 	// Leer y mostrar el contenido del archivo
@@ -43,8 +49,7 @@ struct nodo *precarga(struct nodo* raiz, const char *path ){
 	
 	fclose(arch);
 	
-	
-	imprimirarbol(raiz);
+	//imprimirarbol(raiz);
 	
 	return raiz;
 }
