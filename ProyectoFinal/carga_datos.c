@@ -49,7 +49,5 @@ struct nodo *precarga(struct nodo* raiz, const char *path){
 	
 	fclose(arch);
 	
-	//imprimirarbol(raiz);
-	
 	return raiz;
 }
