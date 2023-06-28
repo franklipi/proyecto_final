@@ -7,11 +7,16 @@ char mostrarMenu(){
 	fflush(stdin);
 	char op;	
 	printf("\n\n");
-	printf("\t\t\t   Bienvenido a F.I.O\n");
-	printf("\t\t\t------------------------\n");
-	printf("\t\t\t    1.Iniciar sesion\n");
-	printf("\t\t\t  2.Crear Usuario Nuevo\n");
-	printf("\t\t\t------------------------\n");
+	printf("      				_/_/_/_/            _/_/_/             _/_/\n");
+	printf("     				_/                    _/             _/    _/\n");
+	printf("     				_/_/_/                _/             _/    _/\n");
+	printf("    				_/                    _/             _/    _/\n");
+	printf("    				_/             _/   _/_/_/       _/    _/_/\n");
+	//printf("\t\t\t\t\t   Bienvenido a F.I.O\n");
+	printf("\t\t\t\t\t------------------------\n");
+	printf("\t\t\t\t\t    1.Iniciar sesion\n");
+	printf("\t\t\t\t\t  2.Crear Usuario Nuevo\n");
+	printf("\t\t\t\t\t------------------------\n");
 	printf("\n");
 	
 	do{

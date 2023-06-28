@@ -30,17 +30,17 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 		}
 	}
 	
-	archivo = fopen(ruta, "w");// abro en modo lectura y escritura
+	archivo = fopen(ruta, "a");// abro en modo lectura y escritura
+	
+	
 	if (archivo == NULL) {
 		printf("Error al crear o abrir el archivo.\n");
 		return;
 	}
 	
+	
 	do {
-		printf("\nBIENVENIDO %s!\n", user);
-		printf("SI DESEA BUSCAR ALGUIEN EN LA RED PRESIONE 1\nSI DESEA SALIR PRESIONE S\n");
-		scanf(" %c", &opx);
-		
+		opx = menuOpciones(user);
 		switch (opx) {
 		case '1':
 			printf("\nBUSCAR USUARIOS\nIngrese el usuario a buscar en la red: ");
@@ -141,4 +141,29 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 	
 	fclose(archivo);
 	printf("\nSaliendo.\n");
+}
+
+
+char menuOpciones(char* user){
+	
+	char opx;
+	fflush(stdin);
+	system("cls");
+	printf("\n\n");
+	printf("\t\t\t\t\t      Usuario:%s\n",user);
+	printf("\t\t\t\t\t------------------------\n");
+	printf("\t\t\t\t\t    1-Buscar amigos\n");
+	printf("\t\t\t\t\t         S-Salir\n");
+	printf("\t\t\t\t\t------------------------\n");
+	printf("\n");
+	
+	do {
+
+		printf("Opcion Ingresada: ");scanf("%c", &opx);
+		if(opx != '1' && opx != 's' && opx != 'S'){
+			puts("Opcion invalida...Reingrese...");
+		}
+	}while(opx != '1' && opx != 's' && opx != 'S');
+	
+	return opx;
 }

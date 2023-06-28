@@ -25,6 +25,10 @@ int main(int argc, char *argv[]){
 	//        Funcion Principal			//						
 	//----------------------------------//
 	
+	
+	
+	
+	
 	do{
 		fflush(stdin);
 		raiz = precarga(raiz,path);
