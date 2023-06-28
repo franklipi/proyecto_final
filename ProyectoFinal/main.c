@@ -6,11 +6,10 @@
 #include <windows.h>
 #include "gestion_arbol.h"
 #include "menu_principal.h"
-#include "login.h"
-#include "Sign_in.h" 
+#include "Ingreso_User.h"
+#include "Registro_User.h"  
 #include "gestion_archivo.h"
 #include "carga_datos.h"
-
 
 int main(int argc, char *argv[]){
 	

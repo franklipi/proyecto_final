@@ -50,9 +50,9 @@ int Sign_in(struct nodo *raiz, const char* path){
 		
 		return 1;
 	}else{
-		if((strcmp(nodoEncontrado->user, user)!=0)){
-			InsertarNuevo(path,user,pass);
-		}
+		
+		InsertarNuevo(path,user,pass);
+		
 		
 		return 0;
 	}

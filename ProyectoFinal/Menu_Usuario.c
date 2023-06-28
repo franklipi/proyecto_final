@@ -5,12 +5,12 @@
 #include <dirent.h>
 #include <string.h>
 #include "gestion_arbol.h"
-#include "Sign_in.h"
+#include "Registro_User.h" 
 #include "Menu_Usuario.h"
 
 void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 	char opx;
-	const char* directorio = "./Users";
+	const char* directorio = "./Users/";
 	char* user = nodoEncontrado->user;
 	const char* formato = ".txt";
 	char nombre_us[26];
@@ -30,7 +30,7 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 		}
 	}
 	
-	archivo = fopen(ruta, "r+");// abro en modo lectura y escritura
+	archivo = fopen(ruta, "w");// abro en modo lectura y escritura
 	if (archivo == NULL) {
 		printf("Error al crear o abrir el archivo.\n");
 		return;

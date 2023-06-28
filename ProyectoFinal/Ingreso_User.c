@@ -1,4 +1,3 @@
-
 #include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -7,7 +6,7 @@
 #include "gestion_arbol.h" 
 #include "Ingreso_User.h"
 #include "Registro_User.h"  
-
+#include "Menu_Usuario.h"
 int login(struct nodo *raiz,const char* path){
 	
 	
@@ -41,8 +40,9 @@ int login(struct nodo *raiz,const char* path){
 		
 		printf("Inicio exitoso.\n");
 		
-		//user_actual=nodoEncontrado;
-		//Menu_Usuario(raiz,user,path);
+		raiz = precarga(raiz,path);
+		nodoEncontrado = buscarnodo(raiz, user);
+		Menu_Usuario(raiz,nodoEncontrado);
 		
 		return 1;
 	} else {

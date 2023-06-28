@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <ctype.h>
 #include <stdio.h>
-#include <conio.h>
 #include <stdbool.h>
 #include <string.h>
-#include "verificar_datos.h"
 
 char* validarUser(){
 	char* users = (char*)malloc(27 * sizeof(char)); // Asignar memoria para el nombre de usuario
@@ -48,41 +46,22 @@ char* validarUser(){
 		}
 		
 	}while(!band); // Usuario valido si cumple las condiciones de caracteres permitidos
-	printf("\nNombre de usuario correcto\n");
 	
 	return users;
-	
 }
 
 
 char *validarPass(){
 	
-	printf("\n Ingrese una contraseña\n");
 	char* passw = (char*)malloc(27 * sizeof(char)); // Asignar memoria para la contraseña
 	bool band;
-	int i = 0;
-	char ch;
+	int i;
 	
 	do {
-		
 	
-		//printf("Ingrese la contraseña: ");
+	
 		scanf("%26s",passw);
 		while (getchar() != '\n');
-		while((ch=getch())!='\r'){
-			if (ch == '\b') {  // Si se presiona la tecla de retroceso (backspace)
-				if (i > 0) {
-					i--;
-					printf("\b \b");  // Borrar el último caracter mostrado en pantalla
-				}
-			} else if (i < 27) {
-				passw[i++] = ch;
-				printf("*");  // Mostrar un asterisco en lugar del caracter
-			}
-		}
-		
-		passw[i] = '\0';
-		
 		
 		size_t len = strlen(passw);
 		if (len < 6 || len > 26) {
@@ -107,9 +86,8 @@ char *validarPass(){
 	}
 		
 	}while(!band); // Contraseña válida si cumple ambas condiciones
-	printf("\n Contraseña guardada correctamente\n");
-	return passw;
 
+	return passw;
 	
 }
 
