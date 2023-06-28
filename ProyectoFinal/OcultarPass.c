@@ -23,8 +23,7 @@ int main() {
 	}
 	
 	password[i] = '\0';  // Agregar el carácter nulo al final de la cadena de contraseña
-	
-	printf("\nLa contrasena ingresada es: %s\n", password);
+
 	
 	return 0;
 }
