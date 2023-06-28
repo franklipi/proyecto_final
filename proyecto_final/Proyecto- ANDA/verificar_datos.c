@@ -46,7 +46,6 @@ char* validarUser(){
 		}
 		
 	}while(!band); // Usuario valido si cumple las condiciones de caracteres permitidos
-	printf("\nNombre de usuario correcto\n");
 	
 	return users;
 }
@@ -54,7 +53,6 @@ char* validarUser(){
 
 char *validarPass(){
 	
-	printf("\n Ingrese una contraseña\n");
 	char* passw = (char*)malloc(27 * sizeof(char)); // Asignar memoria para la contraseña
 	bool band;
 	int i;
@@ -88,7 +86,7 @@ char *validarPass(){
 	}
 		
 	}while(!band); // Contraseña válida si cumple ambas condiciones
-	printf("\n Contraseña guardada correctamente\n");
+
 	return passw;
 	
 }

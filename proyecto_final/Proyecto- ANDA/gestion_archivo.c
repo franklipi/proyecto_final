@@ -19,9 +19,7 @@ int crearArch(const char *path){
 	}else{
 		return 1;
 	}
-	
 	fclose(arch);
-
 }
 
 void InsertarNuevo(const char *path, const char user[], const char pass[]){
@@ -66,7 +64,6 @@ void ordenarUsers(const char* path) {
 		return;
 	}
 
-	
 	
 	while (fgets(line, Max_lines, arch) != NULL) {
 		size_t longg = strlen(line);

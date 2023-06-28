@@ -1,12 +1,19 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "Menu_Usuario.h"
+#include <windows.h>
+
 
 
 char mostrarMenu(){
 	fflush(stdin);
 	char op;	
-	printf("\t\tBienvenido\n\t1.Iniciar sesion\n\t2.Crear Usuario Nuevo\n\t\n");
+	printf("\n\n");
+	printf("\t\t\t   Bienvenido a F.I.O\n");
+	printf("\t\t\t------------------------\n");
+	printf("\t\t\t    1.Iniciar sesion\n");
+	printf("\t\t\t  2.Crear Usuario Nuevo\n");
+	printf("\t\t\t------------------------\n");
+	printf("\n");
 	
 	do{
 		printf("Opcion Ingresada: ");scanf("%c",&op);
@@ -18,3 +25,4 @@ char mostrarMenu(){
 	return op;
 	
 }
+	
