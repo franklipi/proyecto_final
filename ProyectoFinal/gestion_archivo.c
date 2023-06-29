@@ -8,6 +8,41 @@
 #include "gestion_archivo.h"
 #define Max_lines 100
 
+/*
+void  leerAdmin(const char *path,int *cant_users){
+	
+	FILE* arch = fopen(path, "r+");
+	//unsigned int i = 0;
+	unsigned short int numUsers = 0;
+	
+	if (arch == NULL) {
+		printf("Eror en base de datos...No se encuentra.\n");
+		return;
+	}
+	
+	// Contar la cantidad de usuarios en el archivo
+	
+	
+	char line[Max_lines];
+	
+	while (fgets(line, Max_lines, arch) != NULL) {
+		numUsers++;
+	}
+	
+	(*cant_users) = numUsers;
+	
+	fclose(arch);
+	
+	//return cant_users;
+}
+*/
+
+
+
+
+
+
+
 
 int crearArch(const char *path){
 	
@@ -19,10 +54,47 @@ int crearArch(const char *path){
 	}else{
 		return 1;
 	}
-	
 	fclose(arch);
 
 }
+	
+	
+	
+void eliminarUs(const char* path, char* usuario) {
+	
+	FILE* archivo = fopen(path, "r"); // Abre el archivo en modo lectura
+	FILE* archivoTemporal = fopen("temp.txt", "w"); // Abre un archivo temporal para escribir los datos actualizados
+	
+	if (archivo == NULL || archivoTemporal == NULL) {
+		printf("Error al abrir los archivos.\n");
+		return;
+	}
+	
+	char linea[200];
+	int usuarioEncontrado = 0;
+	
+	while (fgets(linea, sizeof(linea), archivo) != NULL) {
+		if (strstr(linea, usuario) == NULL) {
+			fprintf(archivoTemporal, "%s", linea); // Escribe la línea en el archivo temporal si el usuario no coincide
+		} else {
+			usuarioEncontrado = 1;
+		}
+	}
+	
+	fclose(archivo);
+	fclose(archivoTemporal);
+	
+	if (!usuarioEncontrado) {
+		printf("Usuario no encontrado: %s\n", usuario);
+		remove("temp.txt"); // Elimina el archivo temporal si no se encontró el usuario
+		return;
+	}
+	
+	remove(path); // Elimina el archivo original
+	rename("temp.txt", path); // Renombra el archivo temporal al nombre original
+	
+	printf("Usuario eliminado: %s\n", usuario);
+	}
 
 void InsertarNuevo(const char *path, const char user[], const char pass[]){
 	
@@ -38,7 +110,9 @@ void InsertarNuevo(const char *path, const char user[], const char pass[]){
 
 }
 
+
 void ordenarUsers(const char* path) {
+	
 	FILE* arch = fopen(path, "r+");
 	unsigned int i = 0;
 	unsigned short int numUsers = 0;
@@ -57,6 +131,7 @@ void ordenarUsers(const char* path) {
 		numUsers++;
 	}
 		
+	
 	// Leer las líneas en un arreglo
 	rewind(arch);
 	char** lines = (char**)malloc(numUsers * sizeof(char*));

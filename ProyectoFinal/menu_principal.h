@@ -2,4 +2,5 @@
 #define MENU_PRINCIPAL_H
 
 char mostrarMenu();
+void imprimirResponsivo();
 #endif

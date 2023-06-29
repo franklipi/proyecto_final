@@ -10,6 +10,7 @@
 #include "Registro_User.h"  
 #include "gestion_archivo.h"
 #include "carga_datos.h"
+#include "Admin.h"
 
 int main(int argc, char *argv[]){
 	
@@ -30,8 +31,12 @@ int main(int argc, char *argv[]){
 	
 	
 	do{
+		
 		fflush(stdin);
 		raiz = precarga(raiz,path);
+		
+		//system("cls");
+		//imprimirarbol(raiz);
 		op = mostrarMenu();
 		
 		switch (op){
@@ -55,10 +60,14 @@ int main(int argc, char *argv[]){
 		case '3':
 			printf("Saliendo del programa...\n");
 			break;
-		}
+		
+		case '9':
+			//	modoAdmin(raiz,path);
+			break;
+	}
 		printf("\n");
 		
-	} while (op != '3');
+	} while (op != 's');
 	
 	return 0;
 	

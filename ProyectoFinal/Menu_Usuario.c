@@ -10,14 +10,15 @@
 
 void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 	char opx;
+	char opc;
 	const char* directorio = "./Users/";
 	char* user = nodoEncontrado->user;
 	const char* formato = ".txt";
 	char nombre_us[26];
 	char amigos[200];
 	struct nodo* buscar = NULL;
-	int encontrado = 0;
-	int opc_elim;
+	int encontrado=0;
+	char opc_elim;
 	char ruta[256];
 	FILE* archivo;
 	
@@ -30,38 +31,41 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 		}
 	}
 	
-	archivo = fopen(ruta, "a");// abro en modo lectura y escritura
-	
+	archivo = fopen(ruta, "a+");// abro en modo lectura y escritura
 	
 	if (archivo == NULL) {
 		printf("Error al crear o abrir el archivo.\n");
 		return;
 	}
 	
-	
 	do {
 		opx = menuOpciones(user);
 		switch (opx) {
 		case '1':
-			printf("\nBUSCAR USUARIOS\nIngrese el usuario a buscar en la red: ");
+			menuBuscar(user);
 			scanf("%s", nombre_us);
 			
 			buscar = buscarnodo(raiz, nombre_us);
 			if (buscar != NULL) {
-				printf("Usuario encontrado: %s\n", nombre_us);
+				//system("cls");
+				printf("%s esta en linea!!!\n", nombre_us);
 				rewind(archivo); // Vuelve al inicio del archivo para leer desde el principio
 				
-				encontrado = 0; // Reiniciar la variable encontrado a 0
 				
 				while (fgets(amigos, sizeof(amigos), archivo) != NULL) {
-					char* token = strtok(amigos, " ");//dividir la linea en tokens separados por espacios
+					encontrado = 0; // Reiniciar la variable encontrado a 0
+					char* token = strtok(amigos, "\n");//dividir la linea en tokens separados por salto de linea
 					while (token != NULL) {
 						if (strcmp(token, nombre_us) == 0) {
-							printf("Usted tiene '%s' agregado como amigo.\n", nombre_us);
 							encontrado = 1;
+							/*
+							printf("Usted tiene '%s' agregado como amigo.\n", nombre_us);
 							printf("Desea eliminarlo de su lista?\n1. Si\n2. No\n");
-							scanf("%d", &opc_elim);
-							if (opc_elim == 1) {
+							*/
+							
+							opc_elim = menuAmigo(user,nombre_us,encontrado);
+							//scanf("%d", &opc_elim);
+							if (opc_elim == '1') {
 								rewind(archivo); // Vuelve al inicio del archivo para escribir desde el principio
 								FILE* archivoTemporal = fopen("temp.txt", "w"); // Abre un archivo temporal para escribir los datos actualizados
 								
@@ -73,7 +77,7 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 								
 								while (fgets(amigos, sizeof(amigos), archivo) != NULL) {
 									if (strstr(amigos, nombre_us) == NULL) {
-										fprintf(archivoTemporal, "%s", amigos);
+										fprintf(archivoTemporal, "%s\n", amigos);
 									}
 								}
 								
@@ -82,15 +86,14 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 								remove(ruta); // Elimina el archivo original
 								rename("temp.txt", ruta); // Renombra el archivo temporal al nombre original
 								
-								archivo = fopen(ruta, "r+"); // Reabre el archivo en modo lectura y escritura
+								archivo = fopen(ruta, "a+"); // Reabre el archivo en modo lectura y escritura
 								if (archivo == NULL) {
 									printf("Error al abrir el archivo.\n");
 									return;
 								}
 								
-								printf("El usuario ha sido eliminado de su lista de amigos.\n");
+								printf("El %s ha sido eliminado de su lista de amigos.\n",nombre_us);
 								fflush(archivo);
-								encontrado = 0; // Reiniciar el indicador encontrado a 0 después de eliminar el usuario
 							}
 							break; // Salir del bucle interno
 						}
@@ -102,18 +105,22 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 				}
 				
 				if (!encontrado) {
+					/*
 					printf("Usted no tiene agregado '%s' como amigo.\n", nombre_us);
 					printf("Desea AGREGARLO a su lista?\n1. Si\n2. No\n");
 					int opc;
 					scanf("%d", &opc);
+					*/
+					opc = menuAmigo(user,nombre_us,encontrado);
 					switch (opc) {
-					case 1:
+					case '1':
 						fseek(archivo, 0, SEEK_END); // Mueve el puntero al final del archivo
-						fprintf(archivo, "%s ", nombre_us);
+						fprintf(archivo,"%s\n", nombre_us);
+						system("cls");
 						printf("El usuario ha sido agregado a sus amigos.\n");
 						fflush(archivo);
 						break;
-					case 2:
+					case '2':
 						break;
 					default:
 						printf("Opción no válida.\n");
@@ -121,10 +128,30 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 					}
 				}
 			} else {
-				printf("El usuario no ha sido encontrado en la red.\n");
+				system("cls");
+				printf("%s no esta en linea.\n",nombre_us);
 			}
 			rewind(archivo); // Vuelve al inicio del archivo para leer desde el principio
 			break;
+		case '9':
+			opx = menuEliminar(user);
+			
+			if(opx == '1'){
+				char *pass;
+				printf("Ingrese la contraseña: "); scanf("%s",pass);
+				
+				if ((strcmp(nodoEncontrado->pass, pass) == 0)){
+					eliminarUs("login.txt",user);
+					eliminarnodo(raiz,user,nodoEncontrado->pass);
+				}else{
+					puts("Credenciales incorrectas...");
+				}
+			
+			}
+			
+			return;
+			break;
+			
 			
 		case 's':
 		case 'S':
@@ -145,25 +172,122 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 
 
 char menuOpciones(char* user){
+	char opx;
+	fflush(stdin);
 	
+	printf("\n\n");
+	printf("\t\t\t\t\t      Usuario:%s\n",user);
+	printf("\t\t\t\t\t------------------------\n");
+	printf("\t\t\t\t\t    1-Buscar amigos\n");
+	printf("\t\t\t\t\t    9-Eliminar Usuario\n");
+	printf("\t\t\t\t\t         S-Salir\n");
+	printf("\t\t\t\t\t------------------------\n");
+	printf("\n");
+	system("cls");
+	printf("\n\n");
+	printf(" ------------------------\n");
+	printf("|      Usuario:%s     |\n",user);
+	printf(" ------------------------\n");
+	
+	printf("\t\t\t\t\t------------------------\n");
+	printf("\t\t\t\t\t    1-Buscar amigos\n");
+	printf("\t\t\t\t\t    9-Eliminar Usuario\n");
+	printf("\t\t\t\t\t         S-Salir\n");
+	printf("\t\t\t\t\t------------------------\n");
+	printf("\n");
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	do {
+
+		printf("Opcion Ingresada: ");scanf("%c", &opx);
+		if(opx != '1'&& opx != '9' && opx != 's' && opx != 'S'){
+			puts("Opcion invalida...Reingrese...");
+		}
+	}while(opx != '1'&& opx != '9' && opx != 's' && opx != 'S');
+	
+	return opx;
+}
+
+void menuBuscar(char *user){
+	
+	fflush(stdin);
+	system("cls");
+	printf("\n\n");
+	printf("\tUsuario:%s\n",user);
+	printf("\t\t\t\t\t------------------------\n");
+	printf("\t\t\t\t\t          Amigos\n");
+	printf("\t\t\t\t\t------------------------\n");
+	printf("Ingrese el usuario a buscar: ");
+
+	}
+
+char menuAmigo(char *user,const char *amigo, int band){
+	
+	fflush(stdin);
+	char opx;
+	if(band == 1){
+		//system("cls");
+		printf("\n\n");
+		printf("\tUsuario:%s\n",user);
+		printf("\t\t\t\t\t------------------------\n");
+		printf("\t\t\t\t\t          Amigos\n");
+		printf("\t\t\t\t\t------------------------\n");
+		printf("[%s]\n",amigo);
+		printf("Estado: amigo\n");
+		printf("Desea eliminarlo?\n1-Si\n2-No\n");
+		do {
+			printf("Opcion Ingresada: ");scanf("%c", &opx);
+			if(opx != '1' && opx != '2'){
+				puts("Opcion invalida...Reingrese...");
+			}
+		}while(opx != '1' && opx != '2');
+		
+	}else if(band == 0){
+		//system("cls");
+		fflush(stdin);
+		printf("\n\n");
+		printf("\tUsuario:%s\n",user);
+		printf("\t\t\t\t\t------------------------\n");
+		printf("\t\t\t\t\t          Amigos\n");
+		printf("\t\t\t\t\t------------------------\n");
+		printf("[%s]\n",amigo);
+		printf("Estado: Sin relacion\n");
+		printf("Desea Agregarlo?\n1-Si\n2-No\n");
+		do {
+			printf("Opcion Ingresada: ");scanf("%c", &opx);
+			if(opx != '1' && opx != '2'){
+				puts("Opcion invalida...Reingrese...");
+			}
+		}while(opx != '1' && opx != '2');
+	}
+	return opx;	
+}
+	
+char menuEliminar(char *user){
 	char opx;
 	fflush(stdin);
 	system("cls");
 	printf("\n\n");
 	printf("\t\t\t\t\t      Usuario:%s\n",user);
 	printf("\t\t\t\t\t------------------------\n");
-	printf("\t\t\t\t\t    1-Buscar amigos\n");
-	printf("\t\t\t\t\t         S-Salir\n");
+	printf("\t\t\t\t\t    ELIMINACION DE USUARIO\n");
 	printf("\t\t\t\t\t------------------------\n");
 	printf("\n");
-	
+	printf("Esta a punto de eliminar su cuenta...");
+	printf("Desea continuar?\n1-Si\n2-No");
 	do {
-
 		printf("Opcion Ingresada: ");scanf("%c", &opx);
-		if(opx != '1' && opx != 's' && opx != 'S'){
+		if(opx != '1' && opx != '2'){
 			puts("Opcion invalida...Reingrese...");
 		}
-	}while(opx != '1' && opx != 's' && opx != 'S');
+	}while(opx != '1' && opx != '2');
 	
 	return opx;
 }
