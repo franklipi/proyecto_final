@@ -7,6 +7,7 @@
 #include "gestion_arbol.h"
 #include "Registro_User.h" 
 #include "Menu_Usuario.h"
+#include "menu_principal.h"
 
 void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 	char opx;
@@ -54,6 +55,7 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 				
 				while (fgets(amigos, sizeof(amigos), archivo) != NULL) {
 					encontrado = 0; // Reiniciar la variable encontrado a 0
+					amigos[strcspn(amigos, "\n")] = '\0'; // Eliminar el carácter de nueva línea al final de la línea
 					char* token = strtok(amigos, "\n");//dividir la linea en tokens separados por salto de linea
 					while (token != NULL) {
 						if (strcmp(token, nombre_us) == 0) {
@@ -76,7 +78,7 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 								}
 								
 								while (fgets(amigos, sizeof(amigos), archivo) != NULL) {
-									if (strstr(amigos, nombre_us) == NULL) {
+									if (strlen(amigos) > 1 && strstr(amigos, nombre_us) == NULL) {
 										fprintf(archivoTemporal, "%s\n", amigos);
 									}
 								}
@@ -174,33 +176,18 @@ void Menu_Usuario(struct nodo* raiz, struct nodo* nodoEncontrado) {
 char menuOpciones(char* user){
 	char opx;
 	fflush(stdin);
-	
+	//system("cls");
 	printf("\n\n");
-	printf("\t\t\t\t\t      Usuario:%s\n",user);
-	printf("\t\t\t\t\t------------------------\n");
-	printf("\t\t\t\t\t    1-Buscar amigos\n");
-	printf("\t\t\t\t\t    9-Eliminar Usuario\n");
-	printf("\t\t\t\t\t         S-Salir\n");
-	printf("\t\t\t\t\t------------------------\n");
+	printf(" ------------------------\n",2,20);
+	printf("|      Usuario:%s     |\n",user,2,20);
+	printf(" ------------------------\n",2,20);
+	
+	imprimirCentrado("------------------------\n",2,20);
+	imprimirCentrado("    1-Buscar amigos\n",2,20);
+	imprimirCentrado("    9-Eliminar Usuario\n",2,20);
+	imprimirCentrado("         S-Salir\n",2,20);
+	imprimirCentrado("------------------------\n",2,20);
 	printf("\n");
-	system("cls");
-	printf("\n\n");
-	printf(" ------------------------\n");
-	printf("|      Usuario:%s     |\n",user);
-	printf(" ------------------------\n");
-	
-	printf("\t\t\t\t\t------------------------\n");
-	printf("\t\t\t\t\t    1-Buscar amigos\n");
-	printf("\t\t\t\t\t    9-Eliminar Usuario\n");
-	printf("\t\t\t\t\t         S-Salir\n");
-	printf("\t\t\t\t\t------------------------\n");
-	printf("\n");
-	
-	
-	
-	
-	
-	
 	
 	
 	
@@ -218,10 +205,10 @@ char menuOpciones(char* user){
 void menuBuscar(char *user){
 	
 	fflush(stdin);
-	system("cls");
+	//system("cls");
 	printf("\n\n");
 	printf("\tUsuario:%s\n",user);
-	printf("\t\t\t\t\t------------------------\n");
+	printf("\t\t\t\t\t=========================\n");
 	printf("\t\t\t\t\t          Amigos\n");
 	printf("\t\t\t\t\t------------------------\n");
 	printf("Ingrese el usuario a buscar: ");
@@ -235,7 +222,9 @@ char menuAmigo(char *user,const char *amigo, int band){
 	if(band == 1){
 		//system("cls");
 		printf("\n\n");
-		printf("\tUsuario:%s\n",user);
+		printf("=========================\n");
+		printf("USUARIO:%s\n",user);
+		printf("=========================\n");
 		printf("\t\t\t\t\t------------------------\n");
 		printf("\t\t\t\t\t          Amigos\n");
 		printf("\t\t\t\t\t------------------------\n");
