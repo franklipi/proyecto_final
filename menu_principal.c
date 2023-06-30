@@ -80,7 +80,7 @@ char mostrarMenu(){
 	do{
 		fflush(stdin);
 		//imprimirCentrado("=========================\n",6,30);
-		printf("Opcion Ingresada: ",6,1); system("color 0e"); scanf("%c",&op);system("color 0e");
+		printf("Opcion Ingresada: "); system("color 0e"); scanf("%c",&op);system("color 0e");
 		//imprimirCentrado("==============================",6,30);
 		
 		

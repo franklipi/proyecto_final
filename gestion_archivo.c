@@ -13,7 +13,7 @@ void leerAmigos(const char *path,int *cant_users){
 	
 	FILE* arch = fopen(path, "r");
 	//unsigned int i = 0;
-	unsigned short int numUsers = 0;
+	//unsigned short int numUsers = 0;
 	
 	if (arch == NULL) {
 		printf("Eror en base de datos...No se encuentra.\n");
@@ -54,7 +54,7 @@ int crearArch(const char *path){
 	
 	
 	
-void eliminarUs(const char* path, char* usuario) {
+void eliminarUs(const char* path, const  char* usuario) {
 	
 	FILE* archivo = fopen(path, "r"); // Abre el archivo en modo lectura
 	FILE* archivoTemporal = fopen("temp.txt", "w"); // Abre un archivo temporal para escribir los datos actualizados

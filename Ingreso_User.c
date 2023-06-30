@@ -99,6 +99,6 @@ int login(struct nodo *raiz,const char* path){
 		}
 	}while(band);
 	
-	
+	return 0;
 }
 	
