@@ -10,7 +10,7 @@
 #include "Registro_User.h"  
 #include "gestion_archivo.h"
 #include "carga_datos.h"
-#include "Admin.h"
+//#include "Admin.h"
 
 int main(int argc, char *argv[]){
 	
@@ -59,10 +59,6 @@ int main(int argc, char *argv[]){
 			break;
 		case '3':
 			printf("Saliendo del programa...\n");
-			break;
-		
-		case '9':
-			//	modoAdmin(raiz,path);
 			break;
 	}
 		printf("\n");

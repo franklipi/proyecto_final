@@ -6,7 +6,6 @@
 
 struct nodo *precarga(struct nodo* raiz, const char *path){
 	
-	
 	FILE* arch = fopen(path, "r");
 	
 	if(arch == NULL){
@@ -15,11 +14,9 @@ struct nodo *precarga(struct nodo* raiz, const char *path){
 		ordenarUsers(path);
 	}
 	
-	
 	char user[26];
 	char pass[26];
 	char line[54];
-	
 	
 
 	// Leer y mostrar el contenido del archivo
@@ -48,8 +45,6 @@ struct nodo *precarga(struct nodo* raiz, const char *path){
 	}
 	
 	fclose(arch);
-	
-	//imprimirarbol(raiz);
 	
 	return raiz;
 }

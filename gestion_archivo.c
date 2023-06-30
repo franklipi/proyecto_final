@@ -38,13 +38,6 @@ void leerAmigos(const char *path,int *cant_users){
 	fclose(arch);
 }
 
-
-
-
-
-
-
-
 int crearArch(const char *path){
 	
 	FILE* arch = fopen(path, "w");

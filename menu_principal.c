@@ -9,14 +9,6 @@
 #include <string.h>
 #include <unistd.h>
 
-void clearScreen() {
-	#ifdef _WIN32
-		system("cls");
-	#else
-		system("clear");
-	#endif
-}
-
 int obtenerAnchoPantalla() {
 	int ancho_pantalla = 0;
 	#ifdef _WIN32
@@ -63,14 +55,14 @@ char mostrarMenu(){
 
 	printf("\n\n");
 
-	clearScreen();
+	system("cls");
 	
 	imprimirCentrado("===============================================\n",14,40);
-	imprimirCentrado("BIENVENIDO A LA RED SOCIAL OFICIAL DE LA UNAM  \n",14,40);
+	imprimirCentrado(" BIENVENIDO A LA RED SOCIAL OFICIAL DE LA UNAM  \n",14,40);
 	imprimirCentrado("===============================================\n",14,40);
 	
 	
-	imprimirCentrado("|================================================================================|\n",14,20);
+	//imprimirCentrado("|================================================================================|\n",14,20);
 	imprimirCentrado("  _/_/_/_/            _/_/_/             _/_/ ", 14,40);
 	imprimirCentrado("  _/                    _/             _/    _/", 14,40);
 	imprimirCentrado("  _/_/_/                _/             _/    _/", 14,40);
@@ -86,17 +78,18 @@ char mostrarMenu(){
 	printf("\n");
 	
 	do{
+		fflush(stdin);
 		//imprimirCentrado("=========================\n",6,30);
 		printf("Opcion Ingresada: ",6,1); system("color 0e"); scanf("%c",&op);system("color 0e");
 		//imprimirCentrado("==============================",6,30);
 		
 		
 		
-		if(op != '1' && op != '2' && op != '3' && op != '9' && op != 's'  && op != 'S'){
-			puts("Opcion Invalida...Reingrese");system("color 0e");
+		if(op != '1' && op != '2' && op != '3' && op != 's'  && op != 'S'){
+			puts("Opcion Invalida...Reingrese...\n");system("color 0e");
 		}
 		
-	}while(op != '1' && op != '2' && op != '3' && op != '9' && op != 's'  && op != 'S');
+	}while(op != '1' && op != '2' && op != '3' && op != 's'  && op != 'S');
 	
 	
 	

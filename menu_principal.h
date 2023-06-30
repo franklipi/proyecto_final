@@ -2,5 +2,6 @@
 #define MENU_PRINCIPAL_H
 
 char mostrarMenu();
-void imprimirResponsivo();
+int  obtenerAnchoPantalla();
+void imprimirCentrado(const char* mensaje, int color, int columna);
 #endif
